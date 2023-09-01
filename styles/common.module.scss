@@ -1,0 +1,274 @@
+$themeColor: var(--themeColor);
+.DashboardpageWrap {
+    margin-left: 250px;
+    padding-top: 52px;
+    margin-top: 0px;
+    padding-bottom: 58px;
+}
+.pageWrap {
+    margin: 40px 30px 0px 277px;
+    padding-top: 35px;
+    padding-bottom: 58px;
+}
+// --------Table----------------
+.tableArea {
+    margin-top: 20px;
+    table {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        thead {
+            background: #ffffff;
+            th {
+                border: #fff;
+                font: 500 12px/22px Poppins-medium;
+                letter-spacing: 0px;
+                color: #0c101a;
+                padding: 0.75rem;
+                vertical-align: top;
+            }
+        }
+        th {
+            border-top: 1px solid transparent;
+            font: 400 13px/17px Poppins-regular;
+            letter-spacing: 0px;
+            color: #06080d;
+            opacity: 1;
+            padding: 0.75em 0.35rem;
+        }
+        td {
+            border-top: 1px solid transparent;
+            font: 400 13px/17px Poppins-regular;
+            letter-spacing: 0px;
+            color: #06080d;
+            opacity: 1;
+            padding: 0.75em 0.35rem;
+            vertical-align: middle;
+            a {
+                font: 400 13px/17px Poppins-regular;
+            }
+            button {
+                font: 400 13px/35px Poppins-regular;
+                letter-spacing: 0px;
+                background: #fff;
+                border-radius: 4px;
+                padding: 0px 15px 0 0;
+                margin: 0 6px;
+                &.Btn1 {
+                    color: #05ce84;
+                    border: 1px solid #05ce84;
+                }
+                &.Btn2 {
+                    color: #fb7878;
+                    border: 1px solid #fb7878;
+                }
+                &.Btn3 {
+                    color: #f5d356;
+                    border: 1px solid #f5d356;
+                }
+                &.Btn4 {
+                    color: #da7de8;
+                    border: 1px solid #da7de8;
+                }
+                &.Btn5 {
+                    color: #5db8eb;
+                    border: 1px solid #5db8eb;
+                }
+                &.BtnWithoutImg {
+                    padding: 0px 9px 0 9px;
+                }
+            }
+        }
+    }
+}
+.Nodata {
+    color: red;
+    text-align: center;
+    display: block;
+    background: #ffebeb;
+    padding: 12px;
+    border-radius: 10px;
+}
+// -----------------Search Section-------------
+.searchSection {
+    input {
+        background: #e8ebec 0% 0% no-repeat padding-box;
+        border-radius: 6px;
+        border: #fff;
+        // padding: 0 10px;
+        color: #000;
+        font: 400 13px/20px Poppins-regular;
+    }
+    a {
+        opacity: 1;
+        border: #2c52da;
+        padding: 7px 9px;
+        background: transparent linear-gradient(135deg, #00a2ff 0%, #00ed97 100%) 0% 0% no-repeat padding-box;
+        border-radius: 6px !important;
+        button {
+            background: transparent;
+            border: transparent;
+            color: #fff;
+            i {
+                font-size: 18px;
+            }
+        }
+    }
+}
+// -----------end search section --------------
+.BtnGroup {
+    .btnBox {
+        width: 100%;
+        border-radius: 11px;
+        background: #f2f6fe;
+        padding: 9px 15px;
+        text-align: left;
+        font: 400 15px/20px Poppins-regular;
+        letter-spacing: 0px;
+        color: #0c101a;
+        margin-bottom: 15px;
+        border: 0px solid transparent;
+        opacity: 1;
+        &:focus {
+            box-shadow: 0 0 0 0rem transparent;
+        }
+    }
+    .dropDown {
+        .dropDownBtn {
+            width: 100%;
+            border-radius: 11px;
+            background: #2c52da;
+            padding: 7px 15px;
+            text-align: left;
+            font: 400 15px/20px Poppins-regular;
+            letter-spacing: 0px;
+            color: #fff;
+            opacity: 1;
+            border: 0px solid transparent;
+            margin-bottom: 15px;
+            &:focus {
+                box-shadow: 0 0 0 0rem transparent;
+            }
+            span {
+                display: block;
+                font: 400 11px/16px Poppins-regular;
+            }
+            &::after {
+                display: none;
+            }
+            .Arrow {
+                float: right;
+                position: absolute;
+                right: 15px;
+                top: 17px;
+                display: block;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        ul {
+            min-width: 100%;
+            padding: 0;
+            li {
+                a {
+                    padding: 0.5em;
+                    cursor: pointer;
+                    font: 400 14px/21px Poppins-regular;
+                    letter-spacing: 0px;
+                    color: #667086;
+                    display: block;
+                    &:not(:first-child) {
+                        border-top: 0.1em dashed #dde4e6;
+                    }
+                    &:focus,
+                    &:hover {
+                        background: #ecf0f1;
+                        text-decoration: none;
+                    }
+                    &:active {
+                        background: #fbfcfc;
+                    }
+                }
+            }
+        }
+    }
+    .dropDown1 {
+        .dropDownBtn {
+            width: 100%;
+            border-radius: 11px;
+            background: #f2f6fe;
+            padding: 7px 15px;
+            text-align: left;
+            font: 400 15px/20px Poppins-regular;
+            letter-spacing: 0px;
+            color: #0c101a;
+            opacity: 1;
+            border: 0px solid transparent;
+            margin-bottom: 15px;
+            &:focus {
+                box-shadow: 0 0 0 0rem transparent;
+            }
+            span {
+                display: inline-block;
+                font: 400 15px/20px Poppins-regular;
+            }
+            &::after {
+                display: none;
+            }
+            .Arrow {
+                float: right;
+                position: absolute;
+                right: 15px;
+                top: 17px;
+                display: block;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        ul {
+            min-width: 100%;
+            padding: 0;
+            li {
+                a {
+                    padding: 0.5em;
+                    cursor: pointer;
+                    font: 400 14px/21px Poppins-regular;
+                    letter-spacing: 0px;
+                    color: #667086;
+                    display: block;
+                    &:not(:first-child) {
+                        border-top: 0.1em dashed #dde4e6;
+                    }
+                    &:focus,
+                    &:hover {
+                        background: #ecf0f1;
+                        text-decoration: none;
+                    }
+                    &:active {
+                        background: #fbfcfc;
+                    }
+                }
+            }
+        }
+    }
+}
+// --------------Responsive--------
+@media (min-width: 320px) and (max-width: 991px) {
+    .pageWrap,.contentWrapper{
+        margin: 40px 30px 0px 30px;
+    }
+}
+@media (min-width: 320px) and (max-width: 568px) {
+    .pageWrap,.contentWrapper{
+        margin: 10px 12px 0px 12px;
+    }
+    .searchSection{
+        margin-top: 10px;
+    }
+    .tableArea{
+        table{
+            width: auto;
+      min-width: 1000px;
+        }
+    }
+}

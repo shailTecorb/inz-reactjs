@@ -1,0 +1,143 @@
+import { Fragment, useState, useEffect } from "react";
+import styles from "../../../styles/query.module.scss"
+import InputFiled from "../../Auth/Common/input_filed";
+import { list_of_reports_issues } from "../../helpers/business_owner_service"
+import moment from "moment";
+import { useRouter } from "next/router";
+const ListOfAssuesReported = () => {
+    const route = useRouter()
+    const [isOption, setIsOption] = useState(false)
+    const [data, setData] = useState([])
+    const [status, setStatus] = useState("pending")
+    const [totalPending, setTotalPending] = useState()
+    const [totalResolved, setTotalResolved] = useState()
+    const [inputData, setInputData] = useState("")
+    const [message, setMessage] = useState("")
+    const [reportId, setReportId] = useState()
+    useEffect(() => {
+        listingOfReportsAndIssues(status, "")
+    }, [])
+
+    const listingOfReportsAndIssues = async (status, inputData) => {
+        let page = 1;
+        let perPage = 100;
+        const response = await list_of_reports_issues(status, inputData, page, perPage)
+        setData(response.result)
+        setTotalPending(response.totalPending)
+        setTotalResolved(response.totalResolve)
+
+    }
+    const searchOfReportsAndIssues = async (e) => {
+        e.preventDefault()
+        const response = await list_of_reports_issues(status, inputData)
+        setData(response.result)
+        setMessage(response.message)
+        console.log(response)
+    }
+
+    const reportIdHandler = () => {
+        //  localStorage.setItem("reportId",reportId)
+        //   route.push("/Chat/Socket")
+    }
+    let list = data?.map((item, i) => {
+        return (
+            <tr>
+                <td>{i + 1}</td>
+                <td>{item.title}</td>
+                <td>{moment(item.createdAt).format('DD MMM YYYY')}<br />{moment(item.createdAt).format(' h:mm a')}</td>
+                <td>{item.status}</td>
+                <td>{item.aggrementSigned ? "Yes" : "No"}</td>
+                <td >
+                    <button onClick={() => { setReportId(item._id); reportIdHandler() }} className={`${styles.Btn1} ${styles.BtnWithoutImg}`}>View</button>
+                </td>
+            </tr>
+
+        )
+    })
+    // console.log("hyyyyyyyyyy",reportId)
+    return (
+
+        <div className={styles.contentWrapper}>
+            <div className="container-fuild">
+                <div className="row">
+                    <div className="col-md-7">
+                        <h3>List Of Issues Reported</h3>
+                    </div>
+                    {/* <div className="col-md-4">
+                                                <button style={{ background:"#58d9d4"}} onClick={()=>{route.push("/Client/reportAnIssue")}}>Create an Issue</button>
+                                            </div> */}
+                    <div className={`col-12 pr-0 ${styles.clientStatus}`}>
+                        <ul>
+                            <li>
+                                Active <span>{totalPending}</span>
+                            </li>
+                            <li>
+                                Resolve <span>{totalResolved}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-12">
+                        <h6>Issues Reported</h6>
+                    </div>
+                    <div className="col-12">
+                        <ul className={`nav nav-tabs ${styles.NavTabs}`}>
+                            <li className={isOption ? "" : styles.active} style={{ cursor: "pointer" }} >
+                                <a onClick={() => { setIsOption(false); listingOfReportsAndIssues("pending"); setStatus("pending") }} data-toggle="tab">Active</a>
+                            </li>
+                            <li className={isOption ? styles.active : ""} style={{ cursor: "pointer" }} >
+                                <a onClick={() => { setIsOption(true); listingOfReportsAndIssues("resolved"); setStatus("resolved") }} data-toggle="tab">Resolved</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-7 pl-0">
+                        <div className={styles.searchSection}>
+                            <form>
+                                <div className="input-group">
+                                    <InputFiled type_name="text" placeholder_name="Search by title, id" onChange={(e) => { setInputData(e.target.value) }} value={inputData} inputId="text" input_name="" class_name="form-control" />
+                                    <div className="input-group-append">
+                                        <a className="btn btn-secondary" href="/search=">
+                                            <button onClick={(e) => { searchOfReportsAndIssues(e) }}><i className="fa fa-search"></i></button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div className={`col-md-5 ${styles.buttonGroup}`}>
+                        <button onClick={() => { route.push("/Client/reportAnIssue") }}>Create an Issue</button>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className={`tab-content ${styles.TabContent}`}>
+                            <div className="tab-pane active" id="1">
+                                <div className={`${styles.tableArea}`}>
+                                    <div className="table-responsive ">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Title</th>
+                                                    <th>Date and Time</th>
+                                                    <th>Status</th>
+                                                    <th>Aggrement Signed</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                {list}
+                                                <span style={{ color: "red" }}>{message}</span>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default ListOfAssuesReported

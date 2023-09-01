@@ -1,0 +1,207 @@
+import styles from "../../styles/header.module.scss"
+import { useRouter } from 'next/router';
+import {lia_logout,getLiaAgent} from "../helpers/lia_services"
+import React,{useState, useEffect} from "react"
+const Header = () => {
+  const route = useRouter()
+
+  const [fullName, setName] = useState("")
+  useEffect(()=>{
+    if(!localStorage.token){
+
+    }else{
+      // get_lia_agent_data()
+    }
+    
+  },[])
+
+  const get_lia_agent_data = async() =>{
+    const response = await getLiaAgent()
+    if(response.code == 200){
+      setName(response.result.fullName)
+    }
+  }
+  const handleLogout = async() =>{
+    const response = await lia_logout()
+      if(response.code == 200){
+        localStorage.clear()
+        window.location.href = "/"
+      }
+  }
+
+  
+    return (
+        <div className={styles.header}>
+              {/* <!-- Navigation--> */}
+  <nav className={`navbar navbar-expand-lg navbar-dark fixed-top ${styles.mainNav} ${styles.mainNavFixedTop}`}>
+    <a className={`navbar-brand  ${styles.navbarBrand}`} href="index.html">INZvisa</a>
+    <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className={`collapse navbar-collapse ${styles.navCollapse}`}  id="navbarResponsive">
+      <ul className={`navbar-nav navbar-sidenav ${styles.navbarSidenav}`} id="exampleAccordion">
+        <li className={`${styles.navItem}`} data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a className={`nav-link ${styles.navLink}`} style={{cursor:"pointer"}} onClick={()=>{route.push("/LIA/workplace")}}>
+            <i className="fa fa-fw fa-dashboard"></i>
+            <span className="nav-link-text"  >Dashboard</span>
+          </a>
+        </li>
+        <li className={styles.navItem} data-toggle="tooltip" data-placement="right" title="Charts">
+          <a className={`nav-link ${styles.navLink}`} style={{cursor:"pointer"}} 
+          // onClick={()=>{route.push("/LIA/liaAllClient")}}
+          onClick={()=>{route.push("/busines/owner/allClient")}}
+          >
+            <i className="fa fa-fw fa-area-chart"></i>
+            <span className="nav-link-text">Clients</span>
+          </a>
+        </li>
+        <li className={styles.navItem} data-toggle="tooltip" data-placement="right" title="Tables">
+          <a className={`nav-link ${styles.navLink}`} style={{cursor:"pointer"}}  onClick={()=>{route.push("/Client/reportAnIssue/ReportAndIssueList")}}>
+            <i className="fa fa-fw fa-table"></i>
+            <span className="nav-link-text">Reports</span>
+          </a>
+        </li>
+          <li className={styles.navItem} data-toggle="tooltip" data-placement="right" title="Link">
+          <a className={`nav-link ${styles.navLink}`} >
+            <i className="fa fa-fw fa-file"></i>
+            <span className="nav-link-text">Accounts</span>
+          </a>
+        </li>
+        <li className={styles.navItem} data-toggle="tooltip" data-placement="right" title="Link">
+        <a className={`nav-link ${styles.navLink}`} >
+            <i className="fa fa-fw fa-wrench"></i>
+            <span className="nav-link-text">Settings</span>
+          </a>
+        </li>
+        <li className={styles.navItem} data-toggle="tooltip" data-placement="right" title="Link">
+        <a className={`nav-link ${styles.navLink}`} style={{cursor:"pointer"}} onClick={handleLogout} >
+            <i className="fa fa-fw fa-link"></i>
+            <span className="nav-link-text">Logout</span>
+          </a>
+        </li>
+      </ul>
+      <ul className={`navbar-nav sidenav-toggler ${styles.sidenavToggler}`}>
+        <li className={styles.navItem}>
+          <a className="nav-link text-center" id="sidenavToggler">
+            <i className="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul className={`navbar-nav ml-auto ${styles.navbarNav}`}>
+        <li className={`nav-item dropdown ${styles.navItem} ${styles.navDropdown}`}>
+          <a className={`nav-link dropdown-toggle mr-lg-2 ${styles.navLink}`} id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <img src="./images/sms.svg" width= "20px"/>
+            <span className="d-lg-none">Messages
+              <span className="badge badge-pill badge-primary">12 New</span>
+            </span>
+            <span className= {`text-primary d-none d-lg-block ${styles.indicator}`}>
+              <i className="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div className={`dropdown-menu ${styles.dropdownMenu}`} aria-labelledby="messagesDropdown">
+            <h6 className="dropdown-header">New Messages:</h6>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+              <div><strong>David Miller</strong>
+              <span className="small float-right text-muted">11:21 AM</span></div>
+              <div className={`dropdown-message small ${styles.dropdownMessage}`}>Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+            <div><strong>David Miller</strong>
+              <span className="small float-right text-muted">11:21 AM</span></div>
+              <div className={`dropdown-message small ${styles.dropdownMessage}`}>I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+            <div><strong>David Miller</strong>
+              <span className="small float-right text-muted">11:21 AM</span></div>
+              <div className={`dropdown-message small ${styles.dropdownMessage}`}>I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-message small ${styles.dropdownViewAll}`} href="#">View all messages</a>
+          </div>
+        </li>
+        <li className={`nav-item dropdown ${styles.navItem} ${styles.navDropdown}`}>
+          <a className={`nav-link dropdown-toggle mr-lg-2 ${styles.navLink}`} id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="./images/notification.svg" width= "18px"/>
+            <span className="d-lg-none">Alerts
+              <span className="badge badge-pill badge-warning">6 New</span>
+            </span>
+            <span className= {`text-warning d-none d-lg-block ${styles.indicator}`}>
+              <i className="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div className={`dropdown-menu ${styles.dropdownMenu}`} aria-labelledby="alertsDropdown">
+            <h6 className="dropdown-header">New Alerts:</h6>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+              <span className="text-success">
+                <strong>
+                  <i className="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span className="small float-right text-muted">11:21 AM</span>
+              <div className="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+              <span className="text-danger">
+                <strong>
+                  <i className="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
+              </span>
+              <span className="small float-right text-muted">11:21 AM</span>
+              <div className="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className={`dropdown-item ${styles.dropdownItem}`} href="#">
+              <span className="text-success">
+                <strong>
+                  <i className="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span className="small float-right text-muted">11:21 AM</span>
+              <div className="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className="dropdown-item small" href="#">View all alerts</a>
+          </div>
+        </li>
+       
+        <li className={`nav-item dropdown ${styles.navItem} ${styles.navProfileDropdown}`}>
+                <a className={`nav-link dropdown-toggle mr-lg-2 ${styles.navLink}`} id="exampleModal" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div className={styles.profileSec}>
+                        <div className={styles.profileImg}>
+                            <img alt="" src="/images/clients.svg" />
+                            </div>
+                            <span style={{color:"blueviolet"}} className="px-2 text-name">
+                               {fullName}
+                            </span>
+                        </div>
+                    </a>
+                    <div className={`dropdown-menu ${styles.dropdownMenu}`} aria-labelledby="exampleModal">
+                       
+                        <a className={`dropdown-item ${styles.dropdownItem}`} style={{cursor:"pointer"}} onClick={()=>{route.push("/LIA/profile")}}>
+                           Profile   
+                           </a>
+                     
+                        <a className={`dropdown-item ${styles.dropdownItem}`} style={{cursor:"pointer"}} onClick={()=>{route.push("/busines/owner/template")}}>
+                        Template 
+                         </a>
+                       
+                        <a className={`dropdown-item ${styles.dropdownItem}`} style={{cursor:"pointer"}} onClick={()=>{route.push("/Faq")}}>
+                         FAQ & Support  
+                         </a>
+                       
+                        <a className={`dropdown-item ${styles.dropdownItem}`} 
+                          style={{cursor:"pointer"}} onClick={handleLogout}
+                        >
+                        Logout
+                         </a>
+                  </div>
+                </li>
+      </ul>
+    </div>
+  </nav>
+            </div>
+    )
+}
+export default Header

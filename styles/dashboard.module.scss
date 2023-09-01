@@ -1,0 +1,388 @@
+@import "./common.module.scss";
+$themeColor: var(--themeColor);
+.contentWrapper {
+    @extend .DashboardpageWrap;
+
+    .bannerImg {
+        margin-bottom: 30px;
+        padding: 32px 0px 26px;
+        height: 146px;
+        background: transparent linear-gradient(108deg, #00b7fa47 0%, #00f07f47 100%) 0% 0% no-repeat padding-box;
+        h3 {
+            margin-left: 44px;
+            font: 700 28px/46px poppins-bold;
+            margin-bottom: 0px;
+        }
+        .breadcrumb {
+            display: flex;
+            margin-bottom: 11px;
+            padding-left: 22px;
+            li {
+                padding: 0 1.5rem;
+                display: flex;
+                position: relative;
+                &.active {
+                    a,
+                    a:visited {
+                        color: #f39321;
+                        &:hover,
+                        &:active {
+                            color: #f39321;
+                        }
+                    }
+                }
+                a,
+                a:visited {
+                    display: block;
+                    padding: 0rem 0;
+                    text-decoration: none;
+                    font: 400 19px/25px poppins-regular;
+                    color: #000;
+                    &:hover,
+                    &:active {
+                        color: #000;
+                    }
+                }
+            }
+            &.breadcrumbClassic {
+                li {
+                    &:not(:last-of-type) {
+                        &::before {
+                            content: "/";
+                            display: block;
+                            position: absolute;
+                            font-size: 1.75rem;
+                            top: 50%;
+                            right: 0;
+                            transform: translate(50%, -50%);
+                            color: #000;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .DashboardBox {
+        background-color: #fff;
+        padding:15px 20px 15px 10px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        min-height: 210px;
+        .selectBox {
+            font: 400 13px/30px poppins-regular;
+            color: #868686;
+            background-color: #fff;
+            border: 1px solid #868686;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 7px 0 0;
+        }
+        &.Box1 {
+            background: url("../public/images/casesbg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box2 {
+            background: url("../public/images/applicationbg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box3 {
+            background: url("../public/images/reviewsbg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box4 {
+            background: url("../public/images/clientbg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box5 {
+            background: url("../public/images/ppibg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box6 {
+            background: url("../public/images/complaintsbg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #fff;
+        }
+        &.Box7{
+            background-color: #3edd8e21 ;
+        }
+        &.Box8{
+            background-color: #fcb12e1f ;
+        }
+        &.Box9{
+            background-color: #f7535321;
+        }
+        &.Box10{
+            background-color: #da7de821;
+        }
+        &.Box11{
+            background-color: #47b0ec30;
+        }
+        &.Box12{
+            background-color: #efca461f;
+        }
+        &.Box13{
+            background-color: #da7de821;
+        }
+        &.Box14{
+            background-color: #f7535321;
+        }
+        .ImgSec {
+            float: left;
+            margin-right: 13px;
+            width: 45px;
+            height: 45px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .contentSec {
+            h3 {
+                font: 400 16px/43px poppins-medium;
+                color: #000;
+            }
+        }
+        .viewAllSec {
+            text-align: right;
+            font: 400 13px/43px poppins-regular;
+            a {
+                color: $themeColor;
+            }
+        }
+        h6 {
+            font: 400 13px/20px poppins-regular;
+            color: #868686;
+        }
+        h4 {
+            font: 600 15px/25px poppins-semibold;
+            span {
+                font: 400 12px/25px poppins-regular;
+                color: #868686;
+                margin-left: 0px;
+            }
+        }
+    }
+    .invoiceSection {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 20px 40px;
+        h4 {
+            font: 600 20px/60px poppins-SemiBold;
+            color: #000;
+        }
+        .graphSec {
+            width: 165px;
+            height: 165px;
+            margin: 65px 0 5px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        h6 {
+            font: 400 15px/20px poppins-regular;
+            color: #868686;
+            margin-top: 10px;
+        }
+        h5 {
+            font: 600 22px/25px poppins-semibold;
+            span {
+                font: 400 16px/25px poppins-regular;
+                color: #868686;
+                margin-left: 5px;
+            }
+        }
+        h2 {
+            font: 400 18px/22px poppins-medium;
+            color: #000;
+            margin-top: 16px;
+            margin-bottom: 3px;
+        }
+        h3 {
+            font: 400 18px/22px poppins-medium;
+            color: #000;
+        }
+        button {
+            background: #ddd;
+            border: 1px solid #ddd;
+            font: 400 13px/18px poppins-regular;
+            padding: 8px 15px;
+            // border-radius: 7px;
+            margin: 5px 0px 0;
+            &.active {
+                color: #fff;
+                background: #00a2ff;
+                border: 1px solid #00a2ff;
+            }
+        }
+        .radioSec{
+            width: 100%;
+            .radio{
+                display: inline-block;
+                padding-right: 5px;
+                font: 400 13px/21px poppins-regular;
+                input{
+                    margin-right: 2px;
+                    float: left;
+                }
+                h6{
+                    font: 400 15px/12px poppins-regular;
+                    color: #868686;
+                    margin-top: 0;
+                    display: inline-block;
+                    float: left;
+                }
+            }
+        }
+        .graphColor {
+            h6 {
+                font: 400 14px/14px poppins-regular;
+                color: #868686;
+                margin: 25px 4px 15px;
+                display: inline-block;
+                .colorBox {
+                    width: 13px;
+                    height: 13px;
+                    display: inline-block;
+                    margin-right: 2px;
+                    float: left;
+                }
+                .colorBox1 {
+                    background-color: #f39321;
+                }
+                .colorBox2 {
+                    background-color: #66dfa3;
+                }
+                .colorBox3 {
+                    background-color: #fb7878;
+                }
+            }
+        }
+        .linearGraph {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            margin-top: 38px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .DashboardList {
+        padding: 20px 0;
+        margin: 0 20px;
+        border-radius: 14px;
+        background-color: #fff;
+        h3 {
+            text-align: left;
+            font: 600 18px/33px Poppins-medium;
+            letter-spacing: 0px;
+            color: #06080d;
+            opacity: 1;
+            span {
+                font: 500 13px/25px Poppins-medium;
+                letter-spacing: 0px;
+                color: #00a2ff;
+                opacity: 1;
+            }
+        }
+        .viewAll {
+            a {
+                letter-spacing: 0px;
+                color: var(--themeColor);
+                text-align: right;
+                font: 400 14px/33px poppins-regular;
+                display: block;
+            }
+        }
+        .clientStatus {
+            margin: 15px 0;
+            ul {
+                padding-left: 0px;
+                margin-bottom: 10px;
+                li {
+                    list-style-type: none;
+                    display: inline-block;
+                    font: 500 16px/25px Poppins-medium;
+                    letter-spacing: 0px;
+                    color: #1e2330;
+                    margin-right: 18px;
+                    span {
+                        display: inline-block;
+                        background-color: #fff;
+                        padding: 2px 10px;
+                        box-shadow: 0px 3px 24px #00000005;
+                        border-radius: 5px;
+                        margin-left: 10px;
+                    }
+                    &:first-child {
+                        span {
+                            color: #25db62;
+                        }
+                    }
+                    &:nth-child(2) {
+                        margin-right: 0px;
+                        span {
+                            color: #f6c623;
+                        }
+                    }
+                }
+            }
+        }
+        .searchSection {
+            margin-bottom: 20px;
+            input {
+                background: #e8ebec;
+            }
+        }
+    }
+}
+
+
+// ----------------Responsive----------------
+@media(min-width:320px) and (max-width:991px){
+    .contentWrapper{
+        .DashboardBox{
+            h6{
+                font: 400 13px/20px poppins-regular;
+            }
+            .contentSec{
+                h3{
+                    font: 400 14px/43px poppins-medium;
+                }
+            }
+            .viewAllSec{
+                font: 400 12px/43px poppins-regular;
+            }
+        }
+        .DashboardList{
+            h3{
+                font: 600 14px/33px Poppins-medium;
+            }
+            .clientStatus{
+                ul{
+                    li{
+                        font: 500 15px/25px Poppins-medium;
+                    }
+                }
+            }
+        }
+        .invoiceSection{
+            padding: 20px 25px 20px 17px;
+        }
+    }
+
+}

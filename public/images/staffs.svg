@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
+  <g id="staffs" transform="translate(-649 -209)">
+    <rect id="Rectangle_1634" data-name="Rectangle 1634" width="45" height="45" rx="22.5" transform="translate(649 209)" fill="#da7de8"/>
+    <g id="group_2_" data-name="group (2)" transform="translate(659 217.43)">
+      <path id="Path_155784" data-name="Path 155784" d="M9.98,13.1A4.266,4.266,0,1,0,5.714,8.836,4.266,4.266,0,0,0,9.98,13.1Z" transform="translate(-1.195)" fill="#fff"/>
+      <path id="Path_155785" data-name="Path 155785" d="M14.365,19.922A7.789,7.789,0,0,0,1,25.356a.746.746,0,0,0,.746.746H15.825a.746.746,0,0,0,.746-.746,7.515,7.515,0,0,0-.362-2.332A7.733,7.733,0,0,0,14.365,19.922Z" transform="translate(0 -3.296)" fill="#fff"/>
+      <circle id="Ellipse_776" data-name="Ellipse 776" cx="3.172" cy="3.172" r="3.172" transform="translate(14.623 7.13)" fill="#fff"/>
+      <path id="Path_155786" data-name="Path 155786" d="M22.535,17.67a5.585,5.585,0,0,0-2.841.789c.162.145.325.287.478.444a9.247,9.247,0,0,1,2.2,3.707,8.575,8.575,0,0,1,.326,1.4h4.685a.746.746,0,0,0,.746-.746,5.6,5.6,0,0,0-5.6-5.6Z" transform="translate(-4.74 -3.321)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="filenote" transform="translate(-1061 -222)">
+    <rect id="Rectangle_4403" data-name="Rectangle 4403" width="32" height="32" rx="8" transform="translate(1061 222)" fill="#fff"/>
+    <g id="notes" transform="translate(1067 228)">
+      <path id="Path_155731" data-name="Path 155731" d="M6.576,4.545a.827.827,0,0,1-.826-.826V.826A.826.826,0,1,1,7.4.826V3.718A.827.827,0,0,1,6.576,4.545Z" transform="translate(-0.651)" fill="#efca46"/>
+      <path id="Path_155732" data-name="Path 155732" d="M11.326,4.545a.827.827,0,0,1-.826-.826V.826a.826.826,0,0,1,1.653,0V3.718A.827.827,0,0,1,11.326,4.545Z" transform="translate(-1.477)" fill="#efca46"/>
+      <path id="Path_155733" data-name="Path 155733" d="M16.076,4.545a.827.827,0,0,1-.826-.826V.826a.826.826,0,0,1,1.653,0V3.718A.827.827,0,0,1,16.076,4.545Z" transform="translate(-2.302)" fill="#efca46"/>
+      <path id="Path_155734" data-name="Path 155734" d="M15.427,2.25H4.272A2.274,2.274,0,0,0,2,4.522V17.949a2.274,2.274,0,0,0,2.272,2.272H15.427A2.274,2.274,0,0,0,17.7,17.949V4.522A2.274,2.274,0,0,0,15.427,2.25ZM6.131,7h4.131a.826.826,0,1,1,0,1.653H6.131A.826.826,0,1,1,6.131,7Zm8.263,8.263H6.131a.826.826,0,0,1,0-1.653h8.263a.826.826,0,0,1,0,1.653Zm0-3.305H6.131a.826.826,0,1,1,0-1.653h8.263a.826.826,0,1,1,0,1.653Z" transform="translate(0 -0.391)" fill="#efca46"/>
+    </g>
+  </g>
+</svg>

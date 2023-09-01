@@ -1,0 +1,311 @@
+import { Fragment, useState, useEffect, useContext } from "react";
+import styles from "../../../styles/auth.module.scss";
+import InputFiled from "../Common/input_filed";
+import LeftBanner from "../Common/leftBanner";
+import { validateEmail, validatePassword } from "../../Common/validation";
+import CaptchaTest from "../captcha";
+import {
+  business_owner_signup,
+  verify_NZBN,
+} from "../../helpers/business_owner_service";
+import { useRouter } from "next/router";
+import { IdContext } from "../../MyContext/IdDetailsContext";
+import { decryptJs, encryptJS, jwtEncode } from "../../Common/encryptDecrypt";
+import Routes from "../../Common/routes";
+import Captcha from "../Common/ReCaptcha";
+import jwtDecode from "jwt-decode";
+import Link from "next/link";
+
+const VerifyCompany = () => {
+  let emailRegex =
+    /^[A-Z0-9_-]+([\.][A-Z0-9_]+)*@[A-Z0-9-]+(\.[a-zA-Z]{2,3})+$/i;
+  let passwordRegex =
+    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!@^#$%&*? "])[a-zA-Z0-9^!@#$*%&?]{6,20}$/;
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [verifyStatus, setVerifyStatus] = useState(false);
+
+  const [isContact, set_isContact] = useState({
+    email: "",
+    password: "",
+    NZBN: "",
+    captchaValue: "",
+  });
+  const [verifyData, setVerifyData] = useState({});
+
+  const [isError, set_isError] = useState({
+    NzbnErrorMsg: "",
+    isDisabledNzbn: false,
+    verify_nzbn: "",
+    captchaErrorMsg: "",
+  });
+  const [emailAlreadyExist, setEmailAlreadyExist] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+
+
+  useEffect(() => {
+    if (router.query?.verified) {
+      let verifiedData = router.query.verified;
+
+      let decryptedData = decryptJs(verifiedData);
+      if (decryptedData) {
+        let decodedData = jwtDecode(decryptedData);
+        console.log("Decoded data, ", decodedData);
+        // setDecryptedData(decodedData);
+        set_isContact((prev) => {
+          return {
+            ...prev,
+            NZBN: decodedData.number,
+          };
+        });
+
+        // if (decodedData.company !== "") {
+        //   setFieldDisabled((prev) => {
+        //     return {
+        //       ...prev,
+        //       CompanyNameStatus: true,
+        //     };
+        //   });
+        // }
+        // if (decodedData.number !== "") {
+        //   setFieldDisabled((prev) => {
+        //     return {
+        //       ...prev,
+        //       NZBNStatus: true,
+        //     };
+        //   });
+        // }
+      } else {
+        router.replace(Routes.Auth.CompanyVerify.href);
+      }
+    } else {
+      router.replace(Routes.Auth.CompanyVerify.href);
+    }
+    // setRandom(Math.floor(100000 + Math.random() * 900000))
+  }, []);
+
+  const checkValidation =()=>{
+    let status = false
+    let {NZBN, captchaValue} = isContact
+    console.log("Captcha", captchaValue);
+    console.log("NZBN", NZBN);
+    if(!NZBN ){
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please Enter NZBN or ABN" };
+      });
+      setIsDisabled(false)
+      status = false
+    }
+    else if(!captchaValue){
+      set_isError((prev) => {
+        return { ...prev, captchaErrorMsg: "Please check Captcha" };
+      });
+      setIsDisabled(false)
+      status = false
+    }
+    else if(!NZBN  && !captchaValue){
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please Enter NZBN or ABN" , captchaErrorMsg: "Please check Captcha" };
+      });
+      setIsDisabled(false)
+      status = false
+    }
+    else{
+      status = true
+    }
+    return status
+  }
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    console.log("Statu", checkValidation());
+    
+    if(checkValidation()){
+      setVerifyStatus(true);
+      const response = await verify_NZBN(isContact.NZBN);
+      console.log(response);
+      if (response.result?.verify == true) {
+        set_isError((prev) => {
+          return { ...prev, verify_nzbn: "Verified" };
+        });
+        setVerifyData(response.result);
+  
+        console.log("****Data****", verifyData);
+        let encoded = jwtEncode(response.result);
+        let encrypted = encryptJS(encoded);
+        console.log("----------", encrypted);
+        setIsDisabled(false);
+        setVerifyStatus(false);
+        set_isContact((prev) => {
+          return { ...prev, captchaValue: "" };
+        });
+        // let decrypted = decryptJs(encrypted)
+        // console.log("Decrypted----------", decrypted);
+  
+        router.push(`${Routes.Auth.signup.href}?verified=${encrypted}`);
+      } else if (response.result?.verify == false) {
+        set_isError((prev) => {
+          return { ...prev, verify_nzbn: "invalid" };
+        });
+        setIsDisabled(false);
+        setVerifyData({});
+        setVerifyStatus(false);
+      } else {
+        set_isError((prev) => {
+          return { ...prev, NzbnErrorMsg: response.message };
+        });
+        setIsDisabled(false);
+        setVerifyData({});
+        setVerifyStatus(false);
+      }
+    }
+  
+  };
+
+  useEffect(() => {
+    if (!localStorage.token) {
+    } else if (localStorage.token && localStorage.approved == "true") {
+      router.replace("/busines/owner/dashboard");
+    } else if (localStorage.token && localStorage.approved == "false") {
+      router.replace("/busines/owner/visa/selectCountry");
+    }
+  }, []);
+
+  const handleChange = async (e) => {
+    set_isContact((prev) => {
+      return { ...prev, NZBN: e.target.value };
+    });
+
+    if (e.target.value.length <= 13) {
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "", verify_nzbn: "" };
+      });
+      setIsDisabled(true);
+    } else {
+      // e.preventDefault()
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please enter 13 character" };
+      });
+      setIsDisabled(false);
+      setVerifyData({});
+      setVerifyStatus(false);
+    }
+  };
+
+  const handleCaptch = (value) => {
+    console.log("Handle Captcha ", value);
+    set_isContact((prev) => {
+      return { ...prev, captchaValue: value };
+    });
+    setIsDisabled(true)
+    set_isError((prev) => {
+      return { ...prev,  captchaErrorMsg:"" };
+    });
+  };
+  return (
+    <Fragment>
+      <section className={styles.auth}>
+        <div className={styles.container}>
+          <div className="row mx-0">
+            <LeftBanner />
+            <div className="col-md-12 col-lg-6 bg-white">
+              <div className={styles.formSection}>
+                <h3 className="pb-3">Sign Up</h3>
+                {emailAlreadyExist && (
+                  <h2 className={styles.userExist}>{emailAlreadyExist} </h2>
+                )}
+                <form>
+                  <div className={`form-group ${styles.fromGroup}`}>
+                    <label>
+                      NZBN or ABN <span className={styles.required}>*</span>
+                      <span className={styles.errorMsg}>
+                        {isError.NzbnErrorMsg}
+                      </span>
+                    </label>
+                    <InputFiled
+                      type_name="text"
+                      placeholder_name="NZBN or ABN"
+                      inputId=""
+                      input_name="NZBN"
+                      class_name="loading"
+                      value={isContact.NZBN}
+                      maxLength="13"
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                    />
+                    {/* <img src="/images/email.svg" alt="email" /> */}
+                    {verifyStatus && (
+                      <span className={styles.verifyNZBN}>
+                        <i
+                          className="fa fa-spinner fa-spin"
+                          style={{ marginRight: "5px" }}
+                        />
+                      </span>
+                    )}
+                    {isError.verify_nzbn == "Verified" ? (
+                      <span className={styles.verifyNZBN}>Verified</span>
+                    ) : isError.verify_nzbn == "invalid" ? (
+                      <span
+                        className={`${styles.verifyNZBN} ${styles.invalid}`}
+                      >
+                        Invalid
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+<div className="row">
+                  <div
+                    className={`form-group col-12 ${styles.fromGroup} ${styles.captchCodeSec} mb-2`}
+                  >
+                    <label>
+                      Captcha <span className={styles.errorMsg}>{isError.captchaErrorMsg}</span>
+                    </label>
+                    {/* <button onClick={handleClick} type="button" className={styles.refresh}> <img src="/images/refresh.svg" alt="refresh" /></button> */}
+                    <h6>
+                      <Captcha handleCaptch={handleCaptch} />
+                    </h6>
+                  </div>
+
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mt-4">
+                  <div className={styles.remeber}>
+                      {" "}
+                      Not Registered yet? &nbsp;
+                      <Link
+                        href={Routes.Auth.CompanyVerify.href}
+                        as={Routes.Auth.CompanyVerify.as}
+                      >
+                        <a>LOG IN</a>
+                      </Link>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <button
+                        type="submit"
+                        disabled={verifyStatus}
+                        onClick={handleSignup}
+                      >
+                        {isLoading && (
+                          <i
+                            className="fa fa-spinner fa-spin"
+                            style={{ marginRight: "5px" }}
+                          />
+                        )}
+                        {isLoading && <span>Verifying</span>}
+                        {!isLoading && <span>Get Verified</span>}
+                      </button>
+                    </div>
+                    {/* <div className={styles.remeber}> Already Account? <a href="/auth/SignIn">SIGN IN</a></div> */}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Fragment>
+  );
+};
+
+export default VerifyCompany;

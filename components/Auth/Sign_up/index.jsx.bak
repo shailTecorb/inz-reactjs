@@ -1,0 +1,454 @@
+import { Fragment, useState, useEffect, useContext } from "react";
+import styles from "../../../styles/auth.module.scss";
+import InputFiled from "../Common/input_filed";
+import LeftBanner from "../Common/leftBanner";
+import CaptchaTest from "../captcha";
+import {
+  business_owner_signup,
+  verify_NZBN,
+} from "../../helpers/business_owner_service";
+import { useRouter } from "next/router";
+import { IdContext } from "../../MyContext/IdDetailsContext";
+import Routes from "../../Common/routes";
+import { decryptJs, encryptJS, jwtDecode, jwtEncode } from "../../Common/encryptDecrypt";
+import Link from "next/link";
+import Captcha from "../Common/ReCaptcha";
+
+const SignUp = () => {
+  let emailRegex =
+    /^[A-Z0-9_-]+([\.][A-Z0-9_]+)*@[A-Z0-9-]+(\.[a-zA-Z]{2,3})+$/i;
+  let passwordRegex =
+    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!@^#$%&*? "])[a-zA-Z0-9^!@#$*%&?]{6,20}$/;
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isContact, set_isContact] = useState({
+    email: "",
+    password: "",
+    NZBN: "",
+    companyName: "",
+    captchaValue:""
+  });
+  const { setEmail } = useContext(IdContext);
+  const [isChecked, setIsChecked] = useState(false);
+  const [captchaText, setCaptchaText] = useState("");
+  const [random, setRandom] = useState("");
+  const [captchaErrorMsg, setCaptchaError] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [companyErr, setCompanyErr] = useState("");
+
+  const [isDisabledCaptcha, setIsDisabledcaptcha] = useState(false);
+
+  const [name, setName] = useState("NZBN or ABN");
+
+  const [isError, set_isError] = useState({
+    EmailErrorMsg: "",
+    passwordErrorMsg: "",
+    isDisabledPassword: false,
+    isDisabledEmail: false,
+    isDisabled: false,
+    NzbnErrorMsg: "",
+    isDisabledNzbn: false,
+    verify_nzbn: "",
+    captchaErrorMsg:""
+  });
+  const [emailAlreadyExist, setEmailAlreadyExist] = useState("");
+  const [isDisabled, set_isDisabled] = useState(false);
+  const [decryptedData, setDecryptedData] = useState({});
+
+  const [fieldDisabled, setFieldDisabled] = useState({
+    NZBNStatus: false,
+    CompanyNameStatus: false,
+  });
+
+  useEffect(() => {
+    if (router.query?.verified) {
+      let verifiedData = router.query.verified;
+
+      let decryptedData = decryptJs(verifiedData);
+      if (decryptedData) {
+        let decodedData = jwtDecode(decryptedData);
+        console.log("Decoded data, ", decodedData);
+        setDecryptedData(decodedData);
+        set_isContact((prev) => {
+          return {
+            ...prev,
+            companyName: decodedData.company,
+            NZBN: decodedData.number,
+            email: decodedData.email,
+          };
+        });
+    
+
+        setName(decodedData?.type)
+        if (decodedData.company !== "") {
+          setFieldDisabled((prev) => {
+            return {
+              ...prev,
+              CompanyNameStatus: true,
+            };
+          });
+        }
+        if (decodedData.number !== "") {
+          setFieldDisabled((prev) => {
+            return {
+              ...prev,
+              NZBNStatus: true,
+            };
+          });
+        }
+      } else {
+        router.replace(Routes.Auth.CompanyVerify.href);
+      }
+    } else {
+      router.replace(Routes.Auth.CompanyVerify.href);
+    }
+    // setRandom(Math.floor(100000 + Math.random() * 900000))
+  }, []);
+
+  const handleClick = (event) => {
+    //   event.preventDefault()
+    setRandom(Math.floor(100000 + Math.random() * 900000));
+  };
+
+  const checked = () => {
+    isChecked ? setIsChecked(false) : setIsChecked(true);
+  };
+  const handleSignup = async (e) => {
+    console.log("--------", isContact);
+    // if (!captchaText || Number(captchaText) == Number(random)) {
+
+    // } else {
+    //   handleClick()
+    // }
+    e.preventDefault();
+    if (!isContact.email) {
+      setEmailErr("Please enter email");
+    } else if (!emailRegex.test(isContact.email)) {
+      setEmailErr("Please enter valid Email");
+    } else if (!isContact.password) {
+      setPasswordErr("Please enter password");
+    }
+    else if (!isContact.companyName) {
+      setCompanyErr("Please enter Company name");
+    }
+    else if (!isContact.captchaValue) {
+      set_isError((prev) => {
+        return {
+          ...prev,
+          captchaErrorMsg: "Please check captcha",
+        };
+      });
+    }
+    else if (!isContact.NZBN) {
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please enter NZBN number" };
+      });
+    } else if (isContact.NZBN.length > 13) {
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please enter 13 character" };
+      });
+    } else if (!passwordRegex.test(isContact.password)) {
+      setPasswordErr(
+        "Password must be more than 6 characters with 1 uppercase & 1 number."
+      );
+    }
+    // else if (!captchaText) {
+    //   setIsDisabledcaptcha(false)
+    //   setCaptchaError("Please enter captcha")
+    // }
+    // else if (!captchaText || Number(captchaText) !== Number(random)) {
+    //   setIsDisabledcaptcha(false)
+    //   setCaptchaError("Please enter valid captcha")
+    // }
+    else {
+      setIsLoading(true);
+      global.email = isContact.email;
+      set_isError((prev) => {
+        return {
+          ...prev,
+          isDisabledEmail: true,
+          captchaErrorMsg: "",
+          isDisabledCaptcha: true,
+        };
+      });
+      set_isDisabled(true);
+      const response = await business_owner_signup(
+        isContact.email,
+        isContact.password,
+        isContact.NZBN,
+        isContact.companyName
+      );
+      if (response.code == 200) {
+        setEmail(isContact.email);
+        router.push("/auth/OptVerification");
+        setIsLoading(false);
+      }
+      // else if (response.code == 500) {
+      //   // setIsLoading(false)
+      // }
+      else if (response.code == 400) {
+        setEmailAlreadyExist(response.message);
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!localStorage.token) {
+    } else if (localStorage.token && localStorage.approved == "true") {
+      router.replace("/busines/owner/dashboard");
+    } else if (localStorage.token && localStorage.approved == "false") {
+      router.replace("/busines/owner/visa/selectCountry");
+    }
+  }, []);
+
+  const handleChange = async (e) => {
+    set_isContact((prev) => {
+      return { ...prev, NZBN: e.target.value };
+    });
+    if (e.target.value.length == 13) {
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "", verify_nzbn: "" };
+      });
+      const response = await verify_NZBN(e.target.value);
+      console.log(response);
+      if (response.result?.verify == true) {
+        set_isError((prev) => {
+          return { ...prev, verify_nzbn: "Verified" };
+        });
+      } else if (response.result?.verify == false) {
+        set_isError((prev) => {
+          return { ...prev, verify_nzbn: "invalid" };
+        });
+      }
+    } else {
+      set_isError((prev) => {
+        return { ...prev, NzbnErrorMsg: "Please enter 13 character" };
+      });
+    }
+  };
+
+  const handleEdit = () => {
+    console.log("________DecryptedData________", decryptedData);
+    let encoded = jwtEncode(decryptedData);
+    let encrypted = encryptJS(encoded);
+    console.log("----------", encrypted);
+    // setIsDisabled(false);
+    // setVerifyStatus(false);
+    router.push(`${Routes.Auth.CompanyVerify.href}?verified=${encrypted}`);
+  };
+
+  const handleCaptch = (value) => {
+    console.log("Handle Captcha ", value);
+    set_isContact((prev) => {
+      return { ...prev, captchaValue: value };
+    });
+    setIsDisabled(true)
+    set_isError((prev) => {
+      return { ...prev,  captchaErrorMsg:"" };
+    });
+  };
+  return (
+    <Fragment>
+      <section className={styles.auth}>
+        <div className={styles.container}>
+          <div className="row mx-0">
+            <LeftBanner />
+            <div className="col-md-12 col-lg-6 bg-white">
+              <div className={styles.formSection}>
+                <h3 className="pb-3">
+                  Sign Up
+                  {/* <button onClick={()=>router.replace(Routes.Auth.CompanyVerify.href)} className={styles.editBtn}> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button> */}
+                </h3>
+                {emailAlreadyExist && (
+                  <h2 className={styles.userExist}>{emailAlreadyExist} </h2>
+                )}
+                <form>
+                  <div className={`form-group ${styles.fromGroup}`}>
+                    <label>
+                     {name || "NZBN or ABN"} <span className={styles.required}>*</span>
+                      <span className={styles.errorMsg}>
+                        {isError.NzbnErrorMsg}
+                      </span>
+                    </label>
+                    <InputFiled
+                      type_name="text"
+                      placeholder_name="NZBN or ABN"
+                      inputId=""
+                      input_name="NZBN"
+                      class_name="loading"
+                      value={isContact.NZBN}
+                      maxLength="13"
+                      disabled={fieldDisabled.NZBNStatus}
+                      onChange={(e) => {
+                        handleChange(e);
+                      }}
+                    />
+                    <button
+                      onClick={() => handleEdit()}
+                      type="button"
+                      className={styles.edit}
+                    >
+                      <i
+                        className="fa fa-pencil-square-o"
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+                    {isError.verify_nzbn == "Verified" ? (
+                      <span className={styles.verifyNZBN}>Verified</span>
+                    ) : isError.verify_nzbn == "invalid" ? (
+                      <span
+                        className={`${styles.verifyNZBN} ${styles.invalid}`}
+                      >
+                        Invalid
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+                  <div className={`form-group ${styles.fromGroup}`}>
+                    <label>
+                      Company Name <span className={styles.required}>*</span>
+                      <small className={styles.errorMsg}>
+                        {!isContact.companyName  ? companyErr
+                          : ""}
+                      </small>
+                    </label>
+                    <InputFiled
+                      type_name="companyName"
+                      placeholder_name="Company Name"
+                      inputId="companyName"
+                      input_name="companyName"
+                      value={isContact.companyName}
+                      disabled={fieldDisabled.CompanyNameStatus}
+                      onChange={(e) => {
+                        set_isContact((prev) => {
+                          return { ...prev, companyName: e.target.value };
+                        });
+                        setEmailAlreadyExist("");
+                      }}
+                    />
+                    <img src="/images/password.svg" alt="password" />
+                  </div>
+                  <div className={`form-group ${styles.fromGroup}`}>
+                    <label>
+                      Email <span className={styles.required}>*</span>{" "}
+                      <span className={styles.errorMsg}>
+                        {!isContact.email || !emailRegex.test(isContact.email)
+                          ? emailErr
+                          : ""}
+                      </span>
+                    </label>
+                    <InputFiled
+                      type_name="email"
+                      placeholder_name="Email"
+                      inputId="email"
+                      input_name="email"
+                      value={isContact.email.toLocaleLowerCase()}
+                      onChange={(e) => {
+                        set_isContact((prev) => {
+                          return { ...prev, email: e.target.value };
+                        });
+                        setEmailAlreadyExist("");
+                      }}
+                    />
+                    <img src="/images/email.svg" alt="email" />
+                  </div>
+                  <div className={`form-group ${styles.fromGroup}`}>
+                    <label>
+                      Password <span className={styles.required}>*</span>
+                      <small className={styles.errorMsg}>
+                        {!isContact.password ||
+                        !passwordRegex.test(isContact.password)
+                          ? passwordErr
+                          : ""}
+                      </small>
+                    </label>
+                    <InputFiled
+                      type_name="password"
+                      placeholder_name="Password"
+                      inputId="password"
+                      input_name="password"
+                      value={isContact.password}
+                      onChange={(e) => {
+                        set_isContact((prev) => {
+                          return { ...prev, password: e.target.value };
+                        });
+                        setEmailAlreadyExist("");
+                      }}
+                    />
+                    <img src="/images/password.svg" alt="password" />
+                  </div>
+                  {/* <div className={`form-group ${styles.fromGroup} ${styles.captchCodeSec}`}>
+                    <label>Captcha <span className={styles.errorMsg}>{!isDisabledCaptcha && captchaErrorMsg}</span></label>
+                    <button onClick={handleClick} type="button" className={styles.refresh}> <img src="/images/refresh.svg" alt="refresh" /></button>
+                    <h6>
+                      <CaptchaTest styles={styles}
+                        captchaText={captchaText}
+                        setCaptchaText={setCaptchaText}
+                        setRandom={setRandom}
+                        setCaptchaErrorMsg={setCaptchaError}
+                        disabledCaptcha={isDisabledCaptcha}
+                        setIsDisabledcaptcha={setIsDisabledcaptcha}
+                        random={random}
+                      />
+                    </h6>
+                  </div> */}
+<div
+                    className={`form-group col-12 pl-0 ${styles.fromGroup} ${styles.captchCodeSec} mb-2`}
+                  >
+                    <label>
+                      Captcha <span className={styles.errorMsg}>{isError.captchaErrorMsg}</span>
+                    </label>
+                    {/* <button onClick={handleClick} type="button" className={styles.refresh}> <img src="/images/refresh.svg" alt="refresh" /></button> */}
+                    <h6>
+                      <Captcha handleCaptch={handleCaptch} />
+                    </h6>
+                  </div>
+                  <div
+                    className={`form-group col-12 pl-0 ${styles.fromGroup} ${styles.captchCodeSec} mb-2`}
+                  >
+                    <p className={styles.info}>By Clicking sign up ,I you agree to the T&Cs of Immitech and its polices.<br>
+                    </br> Click on the hyperlink to review</p>
+                    </div>
+                  <div className="d-flex align-items-center justify-content-between mt-4">
+                   
+                    <div className={styles.remeber}>
+                      {" "}
+                      Already Account? &nbsp;
+                      <Link
+                        href={Routes.Auth.login.href}
+                        as={Routes.Auth.login.as}
+                        replace={true}
+                      >
+                        <a>SIGN IN</a>
+                      </Link>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <button type="submit"  onClick={handleSignup}>
+                        {isLoading && (
+                          <i
+                            className="fa fa-spinner fa-spin"
+                            style={{ marginRight: "5px" }}
+                          />
+                        )}
+                        {isLoading && <span>Wait</span>}
+                        {!isLoading && <span>Sign Up</span>}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Fragment>
+  );
+};
+
+export default SignUp;

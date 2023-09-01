@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="107.666" height="80.325" viewBox="0 0 107.666 80.325">
+  <g id="verificationmail" transform="translate(-287.893 -184.462)">
+    <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="53.833" cy="3.673" rx="53.833" ry="3.673" transform="translate(287.893 257.441)" fill="#e0f1fb"/>
+    <g id="Group_66" data-name="Group 66" transform="translate(303.491 184.462)">
+      <path id="Path_84" data-name="Path 84" d="M451.947,300.1h-75.8v44.448h75.9V300.1Z" transform="translate(-375.86 -268.65)" fill="#65b2de"/>
+      <g id="Group_64" data-name="Group 64">
+        <path id="Path_85" data-name="Path 85" d="M420.5,385.251l-.1-.1-7.073,5.353-6.978-5.257-.1-.1-31.161,21.316h76.469Z" transform="translate(-375.092 -330.575)" fill="#9ad7fa"/>
+        <path id="Path_86" data-name="Path 86" d="M413.934,184.462h-.1L375.8,215.91l37.948,28.771h.1l37.948-28.676.1-.1Z" transform="translate(-375.604 -184.462)" fill="#9ad7fa"/>
+      </g>
+      <path id="Path_87" data-name="Path 87" d="M461.183,211.877h-41.1V244.95l25.9,19.691h.1l25.9-19.6.1-.1V222.009Z" transform="translate(-407.846 -204.421)" fill="#fff"/>
+      <path id="Path_88" data-name="Path 88" d="M571.216,222.009h10.9l-10.9-10.132Z" transform="translate(-517.879 -204.421)" fill="#7f8ea4"/>
+      <g id="Group_65" data-name="Group 65" transform="translate(16.919 21.125)">
+        <rect id="Rectangle_64" data-name="Rectangle 64" width="15.103" height="1.912" transform="translate(26.764)" fill="#7f8ea4"/>
+        <rect id="Rectangle_65" data-name="Rectangle 65" width="15.103" height="1.912" transform="translate(26.764 6.309)" fill="#7f8ea4"/>
+        <rect id="Rectangle_66" data-name="Rectangle 66" width="41.867" height="1.912" transform="translate(0 12.522)" fill="#7f8ea4"/>
+        <rect id="Rectangle_67" data-name="Rectangle 67" width="41.867" height="1.912" transform="translate(0 18.735)" fill="#7f8ea4"/>
+      </g>
+      <rect id="Rectangle_68" data-name="Rectangle 68" width="22.869" height="8.943" transform="translate(16.895 21.151)" fill="#7f8ea4"/>
+    </g>
+  </g>
+</svg>

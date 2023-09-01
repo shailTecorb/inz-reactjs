@@ -1,0 +1,84 @@
+@import "./common.module.scss";
+
+$themeColor: var(--themeColor);
+.contentWrapper {
+    @extend .pageWrap;
+    h3 {
+        text-align: left;
+        font: 600 20px/33px Poppins-semibold;
+        letter-spacing: 0px;
+        color: #0c101a;
+        opacity: 1;
+        margin-bottom: 20px;
+    }
+    .formArea {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 27px 40px;
+        // ----------------------Faq------------------------
+        .FaqSection {
+            .searchSection {
+                input {
+                    background: #e8ebec;
+                }
+            }
+            .faqSec {
+                padding: 39px 20px 19px;
+                .panelGroup {
+                    .panelArea {
+                        margin-bottom: 20px;
+                        background-color: #fafafb;
+                        border-radius: 12px;
+                        box-shadow: 0 5px 15px #00000021;
+                        overflow: hidden;
+                        .panelHeading {
+                            color: #333;
+                            h4 {
+                                margin-bottom: 0 !important;
+                                font: 600 16px/20px "Open Sans", sans-serif !important;
+                                a {
+                                    display: block;
+                                    padding: 20px 32px;
+                                    text-decoration: none;
+                                    opacity: 0.84;
+                                    text-transform: capitalize;
+                                    font: 600 16px/20px "Open Sans", sans-serif;
+                                    color: #000;
+                                    &::before {
+                                        font-family: FontAwesome;
+                                        content: "\f107";
+                                        float: right;
+                                        transition: all 0.5s;
+                                    }
+                                }
+                            }
+                            &.active {
+                                border-bottom: 1px solid #00000014;
+                                h4 {
+                                    a {
+                                        background-color: #4760f3;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                        .panelBody {
+                            padding: 12.5px 32px 25px 32px;
+                            font: 400 16px/24px "Open Sans", sans-serif;
+                            h5 {
+                                font: 600 18px/25px "Open Sans", sans-serif;
+                                padding: 14px 0;
+                                margin-bottom: 0;
+                            }
+                            p {
+                                margin-bottom: 10px;
+                                text-align: justify;
+                                font: 400 14px/25px poppins-regular;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

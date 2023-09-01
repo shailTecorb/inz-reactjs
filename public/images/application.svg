@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
+  <g id="application" transform="translate(-649 -209)">
+    <rect id="Rectangle_1634" data-name="Rectangle 1634" width="45" height="45" rx="22.5" transform="translate(649 209)" fill="#66dfa3"/>
+    <g id="mail_1_" data-name="mail (1)" transform="translate(662 222)">
+      <path id="Path_155671" data-name="Path 155671" d="M.216,165.21l.881-.65v2.887L0,166.9v-1.265A.53.53,0,0,1,.216,165.21Z" transform="translate(0 -158.741)" fill="#fff"/>
+      <path id="Path_155672" data-name="Path 155672" d="M482.1,165.636V166.9l-1.1.546V164.56l.88.65A.53.53,0,0,1,482.1,165.636Z" transform="translate(-463.991 -158.741)" fill="#fff"/>
+      <path id="Path_155673" data-name="Path 155673" d="M18.105,264.29v8.229a.531.531,0,0,1-.53.53H.53a.531.531,0,0,1-.53-.53V264.29l8.816,4.39a.532.532,0,0,0,.473,0Z" transform="translate(0 -254.944)" fill="#fff"/>
+      <path id="Path_155674" data-name="Path 155674" d="M214.183,1.061H211l1.273-.955a.53.53,0,0,1,.637,0Z" transform="translate(-203.539)" fill="#fff"/>
+      <path id="Path_155675" data-name="Path 155675" d="M74.261,60H61.53a.531.531,0,0,0-.53.53v6.583l6.9,3.434,6.9-3.434V60.53A.531.531,0,0,0,74.261,60ZM67.9,66.365H64.713a.53.53,0,0,1,0-1.061H67.9a.53.53,0,0,1,0,1.061Zm3.183-2.122H64.713a.53.53,0,1,1,0-1.061h6.365a.53.53,0,1,1,0,1.061Z" transform="translate(-58.843 -57.878)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,103 @@
+import React from 'react';
+import { io } from 'socket.io-client';
+import { nanoid } from 'nanoid';
+import {useState,useEffect} from "react"
+import {view_all_reports} from "../../helpers/business_owner_service"
+import socketIOClient from "socket.io-client"
+ let socket ;
+const ChatSocket = () => {
+  const CON_PORT ="https://inz-visa.herokuapp.com/inzVisa";
+   const [message,setMessage] = useState("")
+   const [chat, setChat] = useState([])
+   const [ticketId, setTicketId] = useState()
+   const [reportId,setReportId] = useState()
+   const [userId,setUserId] = useState()
+   const [ connectionErr,setConnectionErr] = useState("")
+   const [status,setStatus] = useState("")
+   const [ createdBy, setCreatedBy] = useState()
+
+  useEffect(()=>{
+    viewUsersDetails()
+  },[])
+          const viewUsersDetails = async()=>{
+              const response = await view_all_reports(localStorage.reportId)
+              if(response.code == 200){
+                setTicketId(response.result.ticketId)
+                setReportId(response.result._id)
+                setUserId(response.result.liaAgentId)
+                setStatus(response.result.status)
+                setCreatedBy(response.result.createdBy)
+              }
+          }
+         
+  useEffect(()=>{
+    socket = io(CON_PORT)
+  },[CON_PORT])
+
+
+  useEffect(() => {
+    socket.emit("join_room",{room_id:localStorage.reportId});
+   }, []);
+   useEffect(()=>{
+       socket.on("chat_message", function(payload){
+           setChat([...chat,payload])
+           console.log("heeeelooooo",payload)
+       }) 
+   },[])
+
+
+console.log("rrrrrrrrrrrrrrr",reportId)
+console.log(chat)
+
+const chatHandler = async(e) =>{
+  e.preventDefault()
+  if (socket.connected) {
+    socket.emit("send_message",{
+     userId:userId,
+     date: new Date(),
+     send_from:localStorage.role, 
+     send_to:"admin",
+     room_id :reportId,
+     reportId: reportId,
+     message:message,
+     date_now: new Date()
+    })
+    setMessage("");
+  } else {
+    setConnectionErr("waiting for connection")
+  }
+ 
+
+console.log(message)
+}
+   console.log(socket)
+  return(
+   <div style={{marginLeft:"200pX",marginTop:"50px"}}>
+     <div> <h1> Chat App</h1>  </div> <span>{connectionErr}</span>
+      {/* {message?.map((msg,i)=>{
+        return <p key={i}>{msg} </p>
+      })
+      } */}
+     <div style={{padding:"5px"}}> <h5>#{ticketId} | Not Able To Upload Documents</h5> </div><p >Status :<span style={{color:"blue"}}> {status}</span> </p>
+          
+      {chat?.map((payload,i)=>{
+          return (
+              <p key={i}>{payload.message}</p>
+          )
+      })}
+      <form>
+      <input 
+        type="text" name="chat" placeholder="type message "
+        onChange={(e)=>{setMessage(e.target.value)}}
+        value={message}
+        style={{background:"grey ", borderRadius:"10px",padding:"7px" }}
+      />
+      
+      <button style={{background:"green",padding:"10px" , borderRadius:"10px"}} type="submit" onClick={chatHandler} > Send </button>
+      </form>
+  </div>
+)
+}
+export default ChatSocket;
+
+

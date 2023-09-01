@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="reminder" transform="translate(-1061 -222)">
+    <rect id="Rectangle_4403" data-name="Rectangle 4403" width="32" height="32" rx="8" transform="translate(1061 222)" fill="#fff"/>
+    <g id="Layer_124" data-name="Layer 124" transform="translate(1070 230)">
+      <path id="Path_155713" data-name="Path 155713" d="M10.473,4a7.473,7.473,0,1,0,7.473,7.473A7.473,7.473,0,0,0,10.473,4Zm2.25,9.724a.83.83,0,0,1-1.179,0L9.884,12.063a.83.83,0,0,1-.241-.59V8.152a.83.83,0,0,1,1.661,0v2.981l1.42,1.412a.83.83,0,0,1,0,1.179Z" transform="translate(-3 -2.297)" fill="#f5d356"/>
+      <path id="Path_155714" data-name="Path 155714" d="M18.308,5.313a.78.78,0,0,1-.457-.141L15.361,3.511a.83.83,0,1,1,.913-1.378l2.491,1.661a.83.83,0,0,1-.457,1.52Z" transform="translate(-5.023 -1.949)" fill="#f5d356"/>
+      <path id="Path_155715" data-name="Path 155715" d="M4.832,5.313a.83.83,0,0,1-.457-1.52L6.866,2.132a.83.83,0,1,1,.913,1.378L5.288,5.172A.781.781,0,0,1,4.832,5.313Z" transform="translate(-3.171 -1.949)" fill="#f5d356"/>
+    </g>
+  </g>
+</svg>

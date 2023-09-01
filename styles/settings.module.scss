@@ -1,0 +1,333 @@
+@import "./common.module.scss";
+$themeColor: var(--themeColor);
+.pageContent {
+    @extend .pageWrap;
+    h3 {
+        text-align: left;
+        font: 600 18px/33px Poppins-semibold;
+        letter-spacing: 0px;
+        color: #0c101a;
+        opacity: 1;
+    }
+    h6 {
+        margin-bottom: 0;
+        font: 500 19px/52px Poppins-Light;
+        text-align: right;
+    }
+
+    .pageDetailArea {
+        border-radius: 15px;
+        width: 100%;
+        background: #f2f2f2 0% 0% no-repeat padding-box;
+        box-shadow: 0px 20px 60px #00000033;
+        border-radius: 20px;
+        opacity: 1;
+        overflow: hidden;
+        height: 532px;
+        margin-top: 18px;
+        .leftMenu {
+            background-color: #fff;
+            padding: 23px;
+            height: 100%;
+            overflow-y: auto;
+            max-height: 532px;
+            min-height: 531px;
+            .logOutBtn {
+                color: #222222;
+                text-shadow: 0px 7px 13px #0000001a;
+                opacity: 1;
+                margin-bottom: 10px;
+                font: 500 21px/26px Poppins-Medium;
+                margin-top: 11px;
+                text-transform: capitalize;
+                text-align: left;
+                width: fit-content;
+                padding: 0;
+                background: transparent;
+                border-color: transparent;
+            }
+            h5 {
+                text-shadow: 0px 7px 13px #0000001a;
+                font: 600 20px/52px Poppins-SemiBold;
+                letter-spacing: 0.5px;
+                color: #474299;
+                opacity: 1;
+                margin-bottom: 20px;
+            }
+            ul {
+                list-style-type: none;
+                padding-left: 0px;
+                li {
+                    a.navLink {
+                        width: 100%;
+                        padding: 13px 23px;
+                        display: block;
+                        color: #707070;
+                        text-shadow: 0px 7px 13px #0000001a;
+                        opacity: 1;
+                        text-transform: capitalize;
+                        font: 500 16px/25px Poppins-Regular;
+                        letter-spacing: 0.6px;
+                        color: #707070;
+                        margin-bottom: 10px;
+                        .nextArrow {
+                            // width: 50%;
+                            float: right;
+                        }
+                        &.active {
+                            border-radius: 15px;
+                            background: #0000000d;
+                        }
+                    }
+                }
+            }
+        }
+        .rightPageDetail {
+            padding: 25px 50px 50px;
+            height: 100%;
+            h5 {
+                text-shadow: 0px 7px 13px #0000001a;
+                margin-bottom: 0;
+                font: 300 20px/52px Poppins-medium;
+                letter-spacing: 0.5px;
+                color: #474299;
+                opacity: 1;
+                display: inline-block;
+            }
+            .buttonArea {
+                margin-top: 12px;
+                display: inline-block;
+                float: right;
+                .saveBtn {
+                    background: transparent linear-gradient(113deg, #00a2ff 0%, #00ed97 100%) 0% 0% no-repeat padding-box;
+                    border-radius: 6px;
+                    opacity: 1;
+                    color: #fff;
+                    padding: 10px 23px;
+                    border: 1px solid transparent;
+                    margin: 0 0 0 10px;
+                    font: 400 13px/20px Poppins-Medium;
+                   
+                    &:disabled {
+                        background-color: #dfdfdf;
+                        border: 1px solid #dfdfdf;
+                        color: #000;
+                    }
+                }
+            }
+            .rightBox {
+                border-radius: 18px;
+                opacity: 1;
+                padding: 7px 5px 15px;
+                margin-top: 14px;
+                min-height: 395px;
+                max-height: 396px;
+                position: relative;
+                overflow: auto;
+                overflow-x: hidden;
+                h5 {
+                    margin-bottom: 0;
+                    margin-top: 14px;
+                    text-align: left;
+                    font: 600 14px/35px Poppins-semiBold;
+                    letter-spacing: 1.4px;
+                    color: #141e4e;
+                    opacity: 1;
+                }
+                h6 {
+                    font: 500 17px/37px Poppins-Light;
+                    text-align: center;
+                    margin-bottom: 0;
+                }
+                .userExist {
+                    font: 400 15px/20px Poppins-Regular;
+                    color: red;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                p {
+                    margin-bottom: 0px;
+                    font: 500 16px/24px Poppins-book;
+                    text-align: left;
+                    color: #707070;
+                    width: 80%;
+                    margin-top: 5px;
+                }
+
+                .price {
+                    font: 400 15px/28px Poppins-Medium !important;
+                    color: #707070;
+                    letter-spacing: 0.35px;
+                    display: inline-block;
+                    float: right;
+                    span {
+                        font: 400 14px/20px Poppins-Medium !important;
+                        color: #3626a8;
+                    }
+                }
+            }
+            .changeLogo {
+                background-color: transparent;
+                border: 1px solid transparent;
+                border-radius: 24px;
+                padding: 2px 23px;
+                margin: 15px auto;
+                font: 400 12px/27px Poppins-black;
+                color: #3b43a7;
+            }
+            .imgArea {
+                height: 145px;
+                width: 145px;
+                margin: auto;
+                overflow: hidden;
+                border-radius: 50%;
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            form {
+                .formGroup {
+                    margin-bottom: 15px;
+                    position: relative;
+                    label {
+                        display: block;
+                        font: 400 15px/20px Poppins-Regular;
+                        color: #1e2330;
+                        width: 100%;
+                        .ErrorMsg {
+                            width: auto;
+                            color: #ff0019;
+                            float: right;
+                            animation: auth_auth_slide-down__2Jx9K__3c6bU 0.3s linear both;
+                            span {
+                                float: inherit;
+                            }
+                        }
+                    }
+                    img {
+                        position: absolute;
+                        right: 17px;
+                        top: 38px;
+                        cursor: pointer;
+                    }
+                    input {
+                        margin-bottom: 0;
+                        width: 100%;
+                        opacity: 1;
+                        font: 500 14px/47px Poppins-SemiBold;
+                        padding: 0px 16px;
+                        background: #e8ebec 0% 0% no-repeat padding-box;
+                        border-radius: 6px;
+                        border: #fff;
+                        color: #000;
+                        &:focus {
+                            outline: -webkit-focus-ring-color auto 0px;
+                        }
+                        &.error {
+                            border-bottom: 2px solid #ff0019;
+                        }
+                    }
+                
+                    .changePassBtn {
+                        text-align: left;
+                        letter-spacing: 0.7px;
+                        color: #474299;
+                        opacity: 1;
+                        font: 400 14px/19px Poppins-Medium;
+                        color: #3b43a7;
+                        border: 0px;
+                        background-color: transparent;
+                        img {
+                            position: relative;
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                        }
+                    }
+                }
+                .passArea {
+                    position: absolute;
+                    top: 23px;
+                    right: 4px;
+                    .editBtn {
+                        background: transparent;
+                        border: transparent;
+                        font: 400 12px/27px Poppins-Medium;
+                        color: #3626a8;
+                    }
+                    .showHide {
+                        background: transparent;
+                        border: transparent;
+                        width: 27px;
+                        height: 27px;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.spanContact {
+    width: 28px;
+    display: inline-flex;
+}
+// .boothOptionSec{
+//     border-bottom:1px solid #ddd;
+// }
+// ---------------------Responsive------------------
+@media (min-width: 992px) and (max-width: 1600px) {
+    .pageContent {
+        padding: 90px 40px;
+        width: calc(100% - 242px);
+        margin-left: 242px;
+        .pageDetailArea {
+            .leftMenu {
+                h5 {
+                    font: 600 18px/52px Poppins-SemiBold;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 320px) and (max-width: 991px) {
+    .pageContent {
+        margin-left: 0px;
+        padding: 95px 15px 145px;
+        width: 100%;
+        h3 {
+            font: 500 28px/52px Poppins-Medium;
+        }
+        .pageDetailArea {
+            .rightPageDetail {
+                padding: 25px 15px 50px 30px;
+                h5 {
+                    font: 500 16px/40px Poppins-Medium;
+                }
+                .imgArea {
+                    height: 115px;
+                    width: 115px;
+                }
+                .buttonArea {
+                    float: right;
+                    margin-bottom: 20px;
+                    width: 100%;
+                }
+                .rightBox {
+                    padding: 15px 10px 20px;
+                    p {
+                        margin-bottom: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+// @media screen and ( max-height:1000px ) and (min-height:800px) {
+//     .pageContent{
+//         margin-left: 291px;
+//     }
+// }

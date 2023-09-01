@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.695" height="16.039" viewBox="0 0 19.695 16.039">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.248" y1="0.066" x2="1" y2="0.889" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#00a2ff"/>
+      <stop offset="1" stop-color="#00ed97"/>
+    </linearGradient>
+  </defs>
+  <g id="staff" transform="translate(-65 -95)">
+    <g id="Group_4" data-name="Group 4" transform="translate(-0.999 -1)">
+      <path id="Union_2" data-name="Union 2" d="M18049.658,16080.039a.656.656,0,0,1-.658-.657,6.849,6.849,0,0,1,11.754-4.779,6.754,6.754,0,0,1,1.619,2.729,6.515,6.515,0,0,1,.322,2.05.658.658,0,0,1-.658.657Zm14.262-1.859a7.645,7.645,0,0,0-.291-1.237,8.166,8.166,0,0,0-1.936-3.261c-.137-.136-.281-.263-.422-.39a4.907,4.907,0,0,1,7.424,4.23.658.658,0,0,1-.658.657Zm-2.939-9.137a2.789,2.789,0,1,1,2.789,2.789A2.794,2.794,0,0,1,18060.98,16069.043Zm-8.883-1.293a3.75,3.75,0,1,1,3.75,3.755A3.748,3.748,0,0,1,18052.1,16067.75Z" transform="translate(-17983 -15968)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

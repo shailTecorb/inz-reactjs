@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20">
+  <g id="calendar" transform="translate(-1036 -297)">
+    <g id="Rectangle_2672" data-name="Rectangle 2672" transform="translate(1036 300)" fill="#fff" stroke="#00a2ff" stroke-width="1.5">
+      <rect width="19" height="17" rx="3" stroke="none"/>
+      <rect x="0.75" y="0.75" width="17.5" height="15.5" rx="2.25" fill="none"/>
+    </g>
+    <g id="Rectangle_2673" data-name="Rectangle 2673" transform="translate(1039 297)" fill="#fff" stroke="#00a2ff" stroke-width="1">
+      <rect width="1.5" height="3.868" rx="0.75" stroke="none"/>
+      <rect x="0.5" y="0.5" width="0.5" height="2.868" rx="0.25" fill="none"/>
+    </g>
+    <g id="Rectangle_2674" data-name="Rectangle 2674" transform="translate(1050 297)" fill="#fff" stroke="#00a2ff" stroke-width="1">
+      <rect width="1.5" height="3.868" rx="0.75" stroke="none"/>
+      <rect x="0.5" y="0.5" width="0.5" height="2.868" rx="0.25" fill="none"/>
+    </g>
+    <g id="Group_13227" data-name="Group 13227" transform="translate(0.25 -1.25)">
+      <circle id="Ellipse_751" data-name="Ellipse 751" cx="1.25" cy="1.25" r="1.25" transform="translate(1039 306)" fill="#00a2ff"/>
+      <circle id="Ellipse_752" data-name="Ellipse 752" cx="1.25" cy="1.25" r="1.25" transform="translate(1044 306)" fill="#00a2ff"/>
+      <circle id="Ellipse_753" data-name="Ellipse 753" cx="1.25" cy="1.25" r="1.25" transform="translate(1049 306)" fill="#00a2ff"/>
+    </g>
+    <g id="Group_13228" data-name="Group 13228" transform="translate(0.25 3.75)">
+      <circle id="Ellipse_751-2" data-name="Ellipse 751" cx="1.25" cy="1.25" r="1.25" transform="translate(1039 306)" fill="#00a2ff"/>
+      <circle id="Ellipse_752-2" data-name="Ellipse 752" cx="1.25" cy="1.25" r="1.25" transform="translate(1044 306)" fill="#00a2ff"/>
+      <circle id="Ellipse_753-2" data-name="Ellipse 753" cx="1.25" cy="1.25" r="1.25" transform="translate(1049 306)" fill="#00a2ff"/>
+    </g>
+  </g>
+</svg>
