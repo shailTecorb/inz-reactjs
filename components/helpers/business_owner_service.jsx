@@ -58,7 +58,30 @@ export const business_addNewStaff_service = async (
     return error;
   }
 };
-
+export const business_addCountry = async (countryId) => {
+  let res = await axios.post(BASE_URL + API_URL.ADD_COUNTRY,
+    {
+      countryId,
+    },
+     {
+    headers: {
+      "Content-Type": "application/json",
+      deviceType: "web",
+      "x-auth": SESSION_TOKEN,
+    },
+  });
+  try {
+    let response = res.data;
+    if (response.code === 403) {
+      //   localStorage.clear();
+      //   window.location.href = "/";
+    }
+    return response;
+  } catch (error) {
+    console.log("Error", error);
+    return error;
+  }
+};
 // COUNTRY LIST
 
 export const business_allCountry_list = async (search) => {
